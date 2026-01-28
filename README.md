@@ -1,6 +1,6 @@
-# 🏥 Insurance Claim Management System
+# 🏥 Insurance Claim Management System (Web & Mobile)
 
-![Logo](https://raw.githubusercontent.com/ganeshkrishnareddy/Insurance-Claim-Management-System/main/assets/logo.png)
+![Logo](assets/logo.png)
 
 A comprehensive, full-stack Insurance Claim Management System designed to streamline the lifecycle of insurance claims from submission to settlement. This mono-repo contains both the **React Web Portal** and the **Flutter Mobile App**.
 
