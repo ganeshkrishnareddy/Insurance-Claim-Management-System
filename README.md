@@ -1,59 +1,72 @@
-# Insurance Claim Management System (React)
+# 🏥 Insurance Claim Management System
 
-## Developed by P Ganesh Krishna Reddy
-- **LinkedIn**: [pganeshkrishnareddy](https://linkedin.com/in/pganeshkrishnareddy)
-- **GitHub**: [ganeshkrishnareddy](https://github.com/ganeshkrishnareddy)
-- **Portfolio**: [pganeshkrishnareddy.vercel.app](https://pganeshkrishnareddy.vercel.app/)
-- **Email**: pganeshkrishnareddy@gmail.com
-- **Mobile**: +91-8374622779
+![Logo](https://raw.githubusercontent.com/ganeshkrishnareddy/Insurance-Claim-Management-System/main/assets/logo.png)
+
+A comprehensive, full-stack Insurance Claim Management System designed to streamline the lifecycle of insurance claims from submission to settlement. This mono-repo contains both the **React Web Portal** and the **Flutter Mobile App**.
 
 ---
 
-## Project Overview
-A professional web application designed to streamline the hospital insurance claim workflow. Built with React and optimized for deployment on platforms like Vercel.
+## 🚀 Features
 
-## Core Features
-- **Patient Claim Creation**: Easily initiate new insurance claims.
-- **Financial Management**:
-  - **Bills**: Track individual medical service charges.
-  - **Advances**: Record payments received before claim submission.
-  - **Settlements**: Log final payments received from insurance.
-  - **Pending Balances**: Automated real-time calculation of remaining amounts (Total - Advances - Paid).
-- **Status Workflow**:
-  - `Draft`: Manage bills and advances before submission.
-  - `Submitted`: Once submitted, the claim awaits review.
-  - `Approved / Rejected`: Reviewer status updates.
-  - `Partially Settled / Settled`: Payment-driven status transitions.
-- **Currency**: All financial data is handled in **INR (₹)**.
-
-## Steps to Run Locally
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/ganeshkrishnareddy/Insurance-Claim-Management-System
-   cd insurance_claims_react
-   ```
-
-2. **Install Dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Start Development Server**:
-   ```bash
-   npm run dev
-   ```
-
-4. **Build for Production**:
-   ```bash
-   npm run build
-   ```
-
-## Deployment on Vercel
-1. Push your code to GitHub.
-2. Connect your GitHub repository to Vercel.
-3. Select the `insurance_claims_react` directory as the project root.
-4. Vercel will auto-detect the Vite build settings. Click **Deploy**.
+- **Role-Based Access Control (RBAC)**: secure login for Admins and Users.
+- **Claim Management**: Create, View, Approve, Reject, and Settle claims.
+- **Real-Time Database**: Powered by **Supabase** (PostgreSQL) for instant data synchronization.
+- **Dashboard Analytics**: Visual insights into claim status and financials.
+- **Secure Authentication**: Robust user management via Supabase Auth.
+- **Multi-Platform**:
+    - 🌐 **Web Portal**: React.js + Vite
+    - 📱 **Mobile App**: Flutter (In Development)
 
 ---
-*Developed with focus on accuracy and user experience.*
+
+## 🛠 Tech Stack
+
+| Component | Technology |
+| :--- | :--- |
+| **Frontend (Web)** | React.js, Vite, Lucide Icons |
+| **Mobile App** | Flutter, Dart |
+| **Backend** | Supabase (PostgreSQL) |
+| **Authentication** | Supabase Auth (Email/Password) |
+| **Real-time** | Supabase Realtime Subscriptions |
+
+---
+
+## 👨‍💻 Developer Information
+
+**P Ganesh Krishna Reddy**  
+*Full Stack Developer*
+
+📧 **Email**: [pganeshkrishnareddy@gmail.com](mailto:pganeshkrishnareddy@gmail.com)  
+📞 **Phone**: +91 8374622779  
+🔗 **LinkedIn**: [pganeshkrishnareddy](https://linkedin.com/in/pganeshkrishnareddy)  
+🌐 **Portfolio**: [pganeshkrishnareddy.vercel.app](https://pganeshkrishnareddy.vercel.app/)
+
+---
+
+## 📦 Project Structure
+
+```bash
+├── src/                # React Web Application Source
+│   ├── components/     # Reusable UI Components
+│   ├── context/        # State Management (Auth, Claims)
+│   └── supabaseClient.js # Database Configuration
+├── mobile_app/         # Flutter Mobile Application Source
+│   ├── lib/            # Dart Logic
+│   └── pubspec.yaml    # Flutter Dependencies
+└── README.md           # Project Documentation
+```
+
+## 🚀 Getting Started
+
+### Web Portal
+1.  Navigate to root directory.
+2.  Install dependencies: `npm install`
+3.  Start server: `npm run dev`
+
+### Mobile App
+1.  Navigate to `mobile_app/`.
+2.  Install dependencies: `flutter pub get`
+3.  Run app: `flutter run`
+
+---
+*© 2024 P Ganesh Krishna Reddy. All Rights Reserved.*
