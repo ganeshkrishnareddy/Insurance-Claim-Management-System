@@ -1,12 +1,15 @@
+/* Light Mode (Default) */
 :root {
   --primary: #6366f1;
   --secondary: #a855f7;
   --bg-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-  --bg-soft: #f8fafc;
-  --card-bg: rgba(255, 255, 255, 0.9);
-  --glass-bg: rgba(255, 255, 255, 0.2);
+  --bg-soft: #f0f2f5;
+  --bg-page: #e5e7eb;
+  --card-bg: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.7);
   --text-main: #1e293b;
   --text-muted: #64748b;
+  --border-color: #e2e8f0;
   --success: #10b981;
   --warning: #f59e0b;
   --danger: #ef4444;
@@ -18,34 +21,71 @@
   --radius-lg: 24px;
 }
 
+/* Dark Mode */
+[data-theme="dark"] {
+  --primary: #818cf8;
+  --secondary: #c084fc;
+  --bg-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  --bg-soft: #1e1e2e;
+  --bg-page: #11111b;
+  --card-bg: #2a2a3c;
+  --glass-bg: rgba(42, 42, 60, 0.8);
+  --text-main: #e2e8f0;
+  --text-muted: #94a3b8;
+  --border-color: #3f3f5a;
+  --success: #34d399;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --pending: #60a5fa;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 10px 20px -3px rgb(0 0 0 / 0.5), 0 4px 8px -4px rgb(0 0 0 / 0.4);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+}
+
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: var(--bg-soft);
+  background-color: var(--bg-page);
   color: var(--text-main);
   min-height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Mobile-centered App Container */
 .app {
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 420px;
+  /* Mobile screen width */
   min-height: 100vh;
+  background-color: var(--bg-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
 }
 
 .dashboard {
   flex: 1;
   display: flex;
   flex-direction: column;
+  background-color: var(--bg-soft);
 }
 
 /* Glassmorphism utility */
@@ -53,13 +93,27 @@ body {
   background: var(--glass-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid var(--border-color);
 }
 
 /* Typography Overrides */
-h1 { font-size: 2rem; font-weight: 700; color: #fff; }
-h2 { font-size: 1.5rem; font-weight: 600; color: var(--text-main); }
-h3 { font-size: 1.1rem; font-weight: 600; color: var(--text-main); }
+h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
 
 /* Buttons Overrides */
 .btn {
@@ -82,4 +136,20 @@ h3 { font-size: 1.1rem; font-weight: 600; color: var(--text-main); }
   box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
 }
 
-/* Specific component styles will follow in Dashboard.css or continued here */
+/* Theme Toggle Button */
+.theme-toggle {
+  background: var(--glass-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--primary);
+  color: white;
+}

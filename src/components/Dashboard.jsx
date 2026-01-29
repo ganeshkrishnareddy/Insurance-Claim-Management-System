@@ -3,16 +3,18 @@ import { Link } from 'react-router-dom';
 import {
     Plus, Bell, User, Clock,
     CheckCircle, XCircle, FileText,
-    Linkedin, Github, Mail
+    Sun, Moon
 } from 'lucide-react';
 import { useClaims } from '../context/ClaimsContext';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 import { calculateTotal, formatCurrency, getStatusColor } from '../utils';
 import Footer from './Footer';
 
 const Dashboard = () => {
     const { claims } = useClaims();
     const { user, logout } = useAuth();
+    const { theme, toggleTheme } = useTheme();
 
     // Calculate counts for stats
     const stats = {
@@ -39,7 +41,10 @@ const Dashboard = () => {
         <div className="dashboard animate-in">
             <header className="header">
                 <h1>Dashboard</h1>
-                <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+                <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                    <button onClick={toggleTheme} className="theme-toggle" title={theme === 'light' ? 'Dark Mode' : 'Light Mode'}>
+                        {theme === 'light' ? <Moon size={20} color="var(--text-main)" /> : <Sun size={20} color="var(--text-main)" />}
+                    </button>
                     <button className="btn-text glass" style={{ padding: '10px', borderRadius: '12px' }}>
                         <Bell size={20} color="var(--primary)" />
                     </button>
