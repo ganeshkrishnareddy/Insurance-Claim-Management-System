@@ -384,3 +384,56 @@ body {
   border-bottom: 2px solid var(--primary);
   display: inline-block;
 }
+
+/* Footer Styles */
+.footer-new {
+  background: var(--card-bg);
+  padding: 32px 24px;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  margin-top: auto;
+}
+
+.footer-dev {
+  font-size: 1rem;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.footer-dev strong {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.footer-info {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.social-btns {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.social-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.social-btn:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}

@@ -1,19 +1,19 @@
-/* Light Mode (Default) */
+/* Light Mode (Default) - Teal/Cyan Theme */
 :root {
-  --primary: #6366f1;
-  --secondary: #a855f7;
-  --bg-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-  --bg-soft: #f0f2f5;
-  --bg-page: #e5e7eb;
+  --primary: #0891b2;
+  --secondary: #06b6d4;
+  --bg-gradient: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+  --bg-soft: #f8fafc;
+  --bg-page: #e0f2fe;
   --card-bg: #ffffff;
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --text-main: #1e293b;
-  --text-muted: #64748b;
-  --border-color: #e2e8f0;
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --border-color: #cbd5e1;
   --success: #10b981;
   --warning: #f59e0b;
   --danger: #ef4444;
-  --pending: #3b82f6;
+  --pending: #0ea5e9;
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -21,22 +21,22 @@
   --radius-lg: 24px;
 }
 
-/* Dark Mode */
+/* Dark Mode - Teal/Cyan Theme */
 [data-theme="dark"] {
-  --primary: #818cf8;
-  --secondary: #c084fc;
-  --bg-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-  --bg-soft: #1e1e2e;
-  --bg-page: #11111b;
-  --card-bg: #2a2a3c;
-  --glass-bg: rgba(42, 42, 60, 0.8);
-  --text-main: #e2e8f0;
+  --primary: #22d3ee;
+  --secondary: #67e8f9;
+  --bg-gradient: linear-gradient(135deg, #0e7490 0%, #0891b2 100%);
+  --bg-soft: #0f172a;
+  --bg-page: #020617;
+  --card-bg: #1e293b;
+  --glass-bg: rgba(30, 41, 59, 0.9);
+  --text-main: #f1f5f9;
   --text-muted: #94a3b8;
-  --border-color: #3f3f5a;
+  --border-color: #334155;
   --success: #34d399;
   --warning: #fbbf24;
   --danger: #f87171;
-  --pending: #60a5fa;
+  --pending: #38bdf8;
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
   --shadow-lg: 0 10px 20px -3px rgb(0 0 0 / 0.5), 0 4px 8px -4px rgb(0 0 0 / 0.4);
@@ -128,12 +128,12 @@ h3 {
 .btn-primary {
   background: var(--bg-gradient);
   color: white;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 4px 12px rgba(8, 145, 178, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 6px 16px rgba(8, 145, 178, 0.4);
 }
 
 /* Theme Toggle Button */
