@@ -59,11 +59,13 @@ const ClaimForm = () => {
 
     return (
         <div className="container animate-in">
-            <header className="header">
-                <button onClick={() => navigate('/')} className="btn-link" style={{ color: 'white' }}>
-                    <ArrowLeft size={16} /> Dashboard
-                </button>
-                <h1>New Patient Claim</h1>
+            <header className="header" style={{ background: 'white', color: 'var(--primary)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                    <button onClick={() => navigate('/')} className="btn-text glass" style={{ padding: '8px', borderRadius: '8px' }}>
+                        <ArrowLeft size={24} color="var(--primary)" />
+                    </button>
+                    <h1 style={{ color: 'var(--primary)', margin: 0 }}>New Patient Claim</h1>
+                </div>
             </header>
 
             <form onSubmit={handleSubmit} className="form-card" style={{ padding: '30px' }}>

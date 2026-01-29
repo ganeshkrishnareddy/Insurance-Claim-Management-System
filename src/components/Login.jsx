@@ -94,63 +94,77 @@ const Login = () => {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    background: #f3f4f6;
+                    background: var(--bg-gradient);
                     padding: 20px;
                 }
                 .login-card {
-                    background: white;
-                    border-radius: 16px;
-                    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+                    background: rgba(255, 255, 255, 0.95);
+                    border-radius: 24px;
+                    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
                     width: 100%;
-                    max-width: 400px;
-                    padding: 30px;
+                    max-width: 420px;
+                    padding: 40px;
+                    backdrop-filter: blur(10px);
                 }
                 .login-header {
                     text-align: center;
-                    margin-bottom: 30px;
+                    margin-bottom: 40px;
                 }
                 .login-icon {
-                    background: var(--primary);
-                    width: 60px;
-                    height: 60px;
-                    border-radius: 50%;
+                    background: var(--bg-soft);
+                    width: 72px;
+                    height: 72px;
+                    border-radius: 20px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    margin: 0 auto 15px;
+                    margin: 0 auto 20px;
+                    box-shadow: var(--shadow-sm);
                 }
-                .login-header h1 { margin: 0; font-size: 1.5rem; }
-                .login-header p { color: #666; margin: 5px 0 0; }
+                .login-header h1 { 
+                    margin: 0; 
+                    font-size: 1.75rem; 
+                    background: var(--bg-gradient);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    font-weight: 700;
+                }
+                .login-header p { color: var(--text-muted); margin: 8px 0 0; }
                 .input-with-icon { position: relative; }
                 .input-icon {
                     position: absolute;
-                    left: 12px;
+                    left: 16px;
                     top: 50%;
                     transform: translateY(-50%);
-                    color: #9ca3af;
+                    color: var(--text-muted);
                 }
-                .input-with-icon input { padding-left: 38px; }
+                .input-with-icon input { 
+                    padding: 14px 14px 14px 48px;
+                    border: 1px solid #e2e8f0;
+                    border-radius: 12px;
+                    font-size: 1rem;
+                    transition: all 0.2s;
+                    background: #f8fafc;
+                }
+                .input-with-icon input:focus {
+                    border-color: var(--primary);
+                    background: white;
+                    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+                    outline: none;
+                }
                 .error-message {
                     background: #fee2e2;
                     color: #ef4444;
-                    padding: 10px;
-                    border-radius: 8px;
+                    padding: 12px;
+                    border-radius: 12px;
                     font-size: 0.9rem;
-                    margin-bottom: 15px;
+                    margin-bottom: 20px;
                     text-align: center;
-                }
-                .login-help {
-                    text-align: center;
-                    margin-top: 20px;
-                    color: #6b7280;
-                    font-size: 0.85rem;
-                    background: #f9fafb;
-                    padding: 10px;
-                    border-radius: 8px;
                 }
                 .quick-login-buttons .btn {
                     justify-content: center;
                     margin-top: 0;
+                    border-radius: 10px;
                 }
             `}</style>
         </div>

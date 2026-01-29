@@ -8,6 +8,7 @@ import {
 import { useClaims } from '../context/ClaimsContext';
 import { useAuth } from '../context/AuthContext';
 import { calculateTotal, formatCurrency, getStatusColor } from '../utils';
+import Footer from './Footer';
 
 const Dashboard = () => {
     const { claims } = useClaims();
@@ -130,25 +131,7 @@ const Dashboard = () => {
                 <Plus size={32} />
             </Link>
 
-            <footer className="footer-new">
-                <p className="footer-dev">Developed by <strong>Jai Krishna</strong></p>
-                <p className="footer-info" style={{ marginBottom: '20px' }}>Hospital Claims Management System</p>
-                <div className="social-btns">
-                    <a href="#" className="social-btn linkedin">
-                        <Linkedin size={20} /> LinkedIn
-                    </a>
-                    <a href="#" className="social-btn github">
-                        <Github size={20} /> GitHub
-                    </a>
-                    <a href="#" className="social-btn email">
-                        <Mail size={20} /> Email
-                    </a>
-                </div>
-                <div className="footer-info">
-                    <p>+91 7681015433 | jaikrishna9437@gmail.com</p>
-                    <p style={{ marginTop: '8px' }}>© 2026 Jai Krishna. Built with ❤️ using React</p>
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 };

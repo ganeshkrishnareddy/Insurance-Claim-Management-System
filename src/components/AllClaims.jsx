@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Search, RotateCcw, ArrowLeft, ArrowRight } from 'lucide-react';
 import { useClaims } from '../context/ClaimsContext';
 import { calculateTotal, formatCurrency, formatDate } from '../utils';
+import Footer from './Footer';
 
 const AllClaims = () => {
     const { claims } = useClaims();
@@ -120,6 +121,7 @@ const AllClaims = () => {
                     </div>
                 </div>
             </main>
+            <Footer />
         </div>
     );
 };

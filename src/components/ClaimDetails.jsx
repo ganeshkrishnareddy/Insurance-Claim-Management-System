@@ -8,6 +8,7 @@ import {
 import { useClaims } from '../context/ClaimsContext';
 import { useAuth } from '../context/AuthContext';
 import { calculateTotal, calculatePending, formatCurrency, formatDate, getStatusColor } from '../utils';
+import Footer from './Footer';
 
 const ClaimDetails = () => {
     const { id } = useParams();
@@ -234,6 +235,7 @@ const ClaimDetails = () => {
                     </div>
                 </div>
             )}
+            <Footer />
         </div>
     );
 };
