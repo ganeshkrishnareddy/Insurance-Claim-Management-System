@@ -110,16 +110,25 @@ const ClaimForm = () => {
                     </div>
 
                     <div className="form-group">
-                        <label>Insurance ID</label>
+                        <label>Insurance ID (Last 4 Digits)</label>
                         <div className="input-wrapper">
                             <CreditCard size={18} className="input-icon" />
                             <input
                                 type="text"
                                 value={formData.insuranceId}
-                                onChange={(e) => setFormData({ ...formData, insuranceId: e.target.value.toUpperCase() })}
+                                onChange={(e) => {
+                                    // Remove "INS-" prefix if present to get raw digits
+                                    let val = e.target.value.toUpperCase().replace('INS-', '').replace(/\D/g, '');
+
+                                    // Limit to 4 digits
+                                    if (val.length > 4) val = val.slice(0, 4);
+
+                                    // Set formatted value
+                                    setFormData({ ...formData, insuranceId: val ? `INS-${val}` : '' })
+                                }}
                                 onBlur={() => setTouched({ ...touched, insuranceId: true })}
                                 required
-                                placeholder="e.g. INS-1234"
+                                placeholder="e.g. 1234"
                                 className={touched.insuranceId && !isIdValid ? 'input-error' : (touched.insuranceId && isIdValid ? 'input-success' : '')}
                             />
                             {touched.insuranceId && isIdValid && (
@@ -127,7 +136,7 @@ const ClaimForm = () => {
                             )}
                         </div>
                         <p className={`helper-text ${touched.insuranceId && !isIdValid ? 'error' : ''}`}>
-                            Format: INS-XXXX (e.g. INS-1001)
+                            Auto-formatted: INS-XXXX (enter 4 digits)
                         </p>
                     </div>
 

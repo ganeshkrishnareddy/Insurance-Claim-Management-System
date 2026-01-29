@@ -71,8 +71,8 @@ const Login = () => {
 
                     {error && <div className="error-message">{error}</div>}
 
-                    <button type="submit" className="btn btn-primary full-width">
-                        Sign In <ArrowRight size={18} />
+                    <button type="submit" className="btn btn-primary full-width" style={{ justifyContent: 'center' }}>
+                        Sign In <ArrowRight size={18} style={{ marginLeft: '8px' }} />
                     </button>
 
                     <div className="quick-login-buttons">

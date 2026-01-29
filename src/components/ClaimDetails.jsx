@@ -19,7 +19,9 @@ const ClaimDetails = () => {
 
     // Local state for modals
     const [showBillModal, setShowBillModal] = useState(false);
+    const [showPaymentModal, setShowPaymentModal] = useState(false);
     const [billForm, setBillForm] = useState({ description: '', amount: '', category: 'Consultation' });
+    const [paymentAmount, setPaymentAmount] = useState('');
 
     if (!claim) return <div className="container">Claim not found</div>;
 
@@ -37,12 +39,21 @@ const ClaimDetails = () => {
         }
     };
 
+    const handleUpdatePayment = (e) => {
+        e.preventDefault();
+        if (paymentAmount) {
+            updateSettlement(claim.id, parseFloat(paymentAmount));
+            setPaymentAmount('');
+            setShowPaymentModal(false);
+        }
+    };
+
     return (
         <div className="dashboard animate-in">
             <header className="header" style={{ background: 'white', color: 'var(--primary)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                    <button onClick={() => navigate(-1)} className="btn-text glass" style={{ padding: '8px', borderRadius: '8px' }}>
-                        <ArrowLeft size={24} color="var(--primary)" />
+                    <button onClick={() => navigate(-1)} className="back-btn" title="Back">
+                        <ArrowLeft size={24} />
                     </button>
                     <h1 style={{ color: 'var(--primary)', margin: 0 }}>{claim.patient.insuranceId}</h1>
                 </div>
@@ -150,39 +161,33 @@ const ClaimDetails = () => {
 
                     <section className="info-card">
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                            <h2 style={{ margin: 0 }}>Bills Breakdown</h2>
-                            <span style={{ color: 'var(--text-muted)' }}>{claim.bills.length} Bills</span>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                <h2 style={{ margin: 0 }}>Bills Breakdown</h2>
+                                <span style={{ background: '#f1f5f9', padding: '2px 8px', borderRadius: '12px', fontSize: '0.8rem', fontWeight: '600' }}>{claim.bills.length}</span>
+                            </div>
+                            {/* Add Bill Button */}
+                            <button onClick={() => setShowBillModal(true)} className="btn btn-outline" style={{ padding: '8px 16px', fontSize: '0.9rem' }}>
+                                <Plus size={16} /> Add Bill
+                            </button>
                         </div>
                         <div className="bills-list-new">
-                            {claim.bills.map(bill => (
-                                <div key={bill.id} style={{ display: 'flex', alignItems: 'center', padding: '16px 0', borderBottom: '1px solid #f1f5f9' }}>
-                                    <div className="claim-avatar" style={{ background: '#f1f5f9', color: 'var(--primary)', width: '40px', height: '40px', fontSize: '0.9rem' }}>
-                                        <FileText size={20} />
+                            {claim.bills.length === 0 ? (
+                                <p style={{ color: 'var(--text-muted)', textAlign: 'center', padding: '20px' }}>No bills added yet.</p>
+                            ) : (
+                                claim.bills.map(bill => (
+                                    <div key={bill.id} style={{ display: 'flex', alignItems: 'center', padding: '16px 0', borderBottom: '1px solid #f1f5f9' }}>
+                                        <div className="claim-avatar" style={{ background: '#f1f5f9', color: 'var(--primary)', width: '40px', height: '40px', fontSize: '0.9rem' }}>
+                                            <FileText size={20} />
+                                        </div>
+                                        <div style={{ flex: 1 }}>
+                                            <p style={{ fontWeight: '600' }}>{bill.description}</p>
+                                            <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>{bill.category} • {formatDate(bill.date)}</p>
+                                        </div>
+                                        <p style={{ fontWeight: '700' }}>{formatCurrency(bill.amount)}</p>
                                     </div>
-                                    <div style={{ flex: 1 }}>
-                                        <p style={{ fontWeight: '600' }}>{bill.description}</p>
-                                        <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>{bill.category} • {formatDate(bill.date)}</p>
-                                    </div>
-                                    <p style={{ fontWeight: '700' }}>{formatCurrency(bill.amount)}</p>
-                                </div>
-                            ))}
+                                ))
+                            )}
                         </div>
-                    </section>
-
-                    <section className="info-card">
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                            <h2 style={{ margin: 0 }}>Advances</h2>
-                            <p style={{ fontWeight: '700', color: 'var(--primary)' }}>{formatCurrency(totalAdvances)}</p>
-                        </div>
-                        {claim.advances && claim.advances.map(adv => (
-                            <div key={adv.id} style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0' }}>
-                                <div>
-                                    <p style={{ fontWeight: '600', fontSize: '0.9rem' }}>Paid by Patient</p>
-                                    <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>{formatDate(adv.date)}</p>
-                                </div>
-                                <p style={{ fontWeight: '600' }}>{formatCurrency(adv.amount)}</p>
-                            </div>
-                        ))}
                     </section>
 
                     <section className="info-card">
@@ -190,51 +195,92 @@ const ClaimDetails = () => {
                             <h2 style={{ margin: 0 }}>Settlements</h2>
                             <p style={{ fontWeight: '700', color: '#10b981' }}>{formatCurrency(totalSettlements)}</p>
                         </div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid #f1f5f9' }}>
                             <div>
                                 <p style={{ fontWeight: '600', fontSize: '0.9rem' }}>Settled by Insurance</p>
-                                <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>{formatDate(claim.updatedAt)}</p>
+                                <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>Total processed payments</p>
                             </div>
                             <p style={{ fontWeight: '600' }}>{formatCurrency(totalSettlements)}</p>
                         </div>
+
+                        {/* Admin Action for Payment */}
+                        {user?.role === 'admin' && (
+                            <div style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid #f1f5f9' }}>
+                                <button onClick={() => setShowPaymentModal(true)} className="btn btn-primary full-width">
+                                    Update Payment / Settlement
+                                </button>
+                            </div>
+                        )}
                     </section>
                 </div>
             </main>
 
-            {/* Simple Add Bill Modal */}
+            {/* Add Bill Modal */}
             {showBillModal && (
                 <div className="modal-overlay" style={{ background: 'rgba(0,0,0,0.5)', position: 'fixed', inset: 0, zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <div className="info-card" style={{ width: '100%', maxWidth: '400px' }}>
-                        <h2 style={{ fontSize: '1.25rem' }}>Add New Bill</h2>
+                    <div className="info-card animate-in" style={{ width: '100%', maxWidth: '400px', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+                            <h2 style={{ fontSize: '1.25rem', margin: 0 }}>Add New Bill</h2>
+                            <button onClick={() => setShowBillModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}><XCircle size={24} color="#666" /></button>
+                        </div>
                         <form onSubmit={handleAddBill} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                             <div>
-                                <label style={{ display: 'block', fontSize: '0.85rem', marginBottom: '4px' }}>Description</label>
+                                <label style={{ display: 'block', fontSize: '0.85rem', marginBottom: '6px', fontWeight: '600' }}>Description</label>
                                 <input
                                     type="text"
-                                    style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0' }}
+                                    style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #e2e8f0' }}
+                                    placeholder="e.g. Lab Tests, Consultation"
                                     value={billForm.description}
                                     onChange={e => setBillForm({ ...billForm, description: e.target.value })}
                                     required
                                 />
                             </div>
                             <div>
-                                <label style={{ display: 'block', fontSize: '0.85rem', marginBottom: '4px' }}>Amount</label>
+                                <label style={{ display: 'block', fontSize: '0.85rem', marginBottom: '6px', fontWeight: '600' }}>Amount (₹)</label>
                                 <input
                                     type="number"
-                                    style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0' }}
+                                    style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #e2e8f0' }}
+                                    placeholder="0.00"
                                     value={billForm.amount}
                                     onChange={e => setBillForm({ ...billForm, amount: e.target.value })}
                                     required
                                 />
                             </div>
-                            <div style={{ display: 'flex', gap: '12px', marginTop: '12px' }}>
-                                <button type="button" onClick={() => setShowBillModal(false)} className="btn btn-text" style={{ flex: 1 }}>Cancel</button>
-                                <button type="submit" className="btn btn-primary" style={{ flex: 1 }}>Add Bill</button>
-                            </div>
+                            <button type="submit" className="btn btn-primary full-width" style={{ marginTop: '8px' }}>Add Bill</button>
                         </form>
                     </div>
                 </div>
             )}
+
+            {/* Update Payment Modal */}
+            {showPaymentModal && (
+                <div className="modal-overlay" style={{ background: 'rgba(0,0,0,0.5)', position: 'fixed', inset: 0, zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <div className="info-card animate-in" style={{ width: '100%', maxWidth: '400px', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+                            <h2 style={{ fontSize: '1.25rem', margin: 0 }}>Update Payment</h2>
+                            <button onClick={() => setShowPaymentModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}><XCircle size={24} color="#666" /></button>
+                        </div>
+                        <form onSubmit={handleUpdatePayment} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+                                Add a payment amount received from the insurance provider. This will update the total settlement amount.
+                            </p>
+                            <div>
+                                <label style={{ display: 'block', fontSize: '0.85rem', marginBottom: '6px', fontWeight: '600' }}>Payment Amount (₹)</label>
+                                <input
+                                    type="number"
+                                    style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #e2e8f0' }}
+                                    placeholder="0.00"
+                                    value={paymentAmount}
+                                    onChange={e => setPaymentAmount(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <button type="submit" className="btn btn-primary full-width" style={{ marginTop: '8px' }}>Process Payment</button>
+                        </form>
+                    </div>
+                </div>
+            )}
+
             <Footer />
         </div>
     );
