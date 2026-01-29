@@ -42,8 +42,8 @@ const Dashboard = () => {
             <header className="header">
                 <h1>Dashboard</h1>
                 <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                    <button onClick={toggleTheme} className="theme-toggle" title={theme === 'light' ? 'Dark Mode' : 'Light Mode'}>
-                        {theme === 'light' ? <Moon size={20} color="var(--text-main)" /> : <Sun size={20} color="var(--text-main)" />}
+                    <button onClick={toggleTheme} className="btn-text glass" style={{ padding: '10px', borderRadius: '12px', background: 'white' }} title={theme === 'light' ? 'Dark Mode' : 'Light Mode'}>
+                        {theme === 'light' ? <Moon size={20} color="#16a34a" /> : <Sun size={20} color="#16a34a" />}
                     </button>
                     <button className="btn-text glass" style={{ padding: '10px', borderRadius: '12px' }}>
                         <Bell size={20} color="var(--primary)" />
