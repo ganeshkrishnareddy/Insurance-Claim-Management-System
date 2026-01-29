@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --primary: #16a34a;
-  --secondary: #22c55e;
-  --bg-gradient: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+  --primary: #6366f1;
+  --secondary: #8b5cf6;
+  --bg-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
   --bg-soft: #f8fafc;
   --card-bg: #ffffff;
-  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-bg: rgba(255, 255, 255, 0.9);
   --text-main: #0f172a;
   --text-muted: #475569;
-  --success: #16a34a;
+  --success: #22c55e;
   --warning: #f59e0b;
   --danger: #ef4444;
   --pending: #3b82f6;
@@ -388,39 +388,43 @@ body {
 /* Footer Styles */
 .footer-new {
   background: var(--card-bg);
-  padding: 32px 24px;
+  padding: 28px 24px;
   text-align: center;
   border-top: 1px solid var(--border-color);
   margin-top: auto;
 }
 
+.footer-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 12px;
+  letter-spacing: 0.02em;
+}
+
 .footer-dev {
-  font-size: 1rem;
-  color: var(--text-main);
-  margin-bottom: 4px;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  line-height: 1.5;
 }
 
 .footer-dev strong {
-  color: var(--primary);
+  color: var(--text-main);
   font-weight: 700;
-}
-
-.footer-info {
-  color: var(--text-muted);
-  font-size: 0.85rem;
 }
 
 .social-btns {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  margin: 16px 0;
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
 .social-btn {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -436,4 +440,27 @@ body {
   color: white;
   border-color: var(--primary);
   transform: translateY(-2px);
+}
+
+.footer-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.footer-meta .flutter-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.footer-meta .flutter-link:hover {
+  opacity: 0.8;
+}
+
+.footer-meta .version-text {
+  margin-top: 8px;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  opacity: 0.7;
 }

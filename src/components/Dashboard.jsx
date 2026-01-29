@@ -42,20 +42,20 @@ const Dashboard = () => {
             <header className="header">
                 <h1>Dashboard</h1>
                 <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                    <button onClick={toggleTheme} className="btn-text glass" style={{ padding: '10px', borderRadius: '12px', background: 'white' }} title={theme === 'light' ? 'Dark Mode' : 'Light Mode'}>
-                        {theme === 'light' ? <Moon size={20} color="#16a34a" /> : <Sun size={20} color="#16a34a" />}
+                    <button onClick={toggleTheme} className="btn-text glass" style={{ padding: '10px', borderRadius: '12px', background: 'var(--card-bg)' }} title={theme === 'light' ? 'Dark Mode' : 'Light Mode'}>
+                        {theme === 'light' ? <Moon size={20} color="var(--primary)" /> : <Sun size={20} color="var(--primary)" />}
                     </button>
-                    <button className="btn-text glass" style={{ padding: '10px', borderRadius: '12px' }}>
+                    <button className="btn-text glass" style={{ padding: '10px', borderRadius: '12px', background: 'var(--card-bg)' }}>
                         <Bell size={20} color="var(--primary)" />
                     </button>
-                    <button onClick={logout} className="btn-text glass" style={{ padding: '10px', borderRadius: '12px' }}>
+                    <button onClick={logout} className="btn-text glass" style={{ padding: '10px', borderRadius: '12px', background: 'var(--card-bg)' }}>
                         <User size={20} color="var(--primary)" />
                     </button>
                 </div>
             </header>
 
             <section className="hero-section">
-                <h1>Welcome back, Admin</h1>
+                <h1>Welcome back, {user?.role === 'admin' ? 'Admin' : 'User'}</h1>
                 <p>Here's what's happening with your claims today</p>
             </section>
 
