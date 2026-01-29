@@ -1,178 +1,152 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Plus, User, ArrowRight, Search, Filter, SortAsc, Clock, Linkedin, Github, Globe, X, LogOut } from 'lucide-react';
+import {
+    Plus, Bell, User, Clock,
+    CheckCircle, XCircle, FileText,
+    Linkedin, Github, Mail
+} from 'lucide-react';
 import { useClaims } from '../context/ClaimsContext';
 import { useAuth } from '../context/AuthContext';
-import { calculateTotal, formatCurrency, getStatusColor, formatTimeAgo } from '../utils';
+import { calculateTotal, formatCurrency, getStatusColor } from '../utils';
 
 const Dashboard = () => {
     const { claims } = useClaims();
     const { user, logout } = useAuth();
-    const [searchQuery, setSearchQuery] = useState('');
-    const [debouncedQuery, setDebouncedQuery] = useState('');
-    const [filterStatus, setFilterStatus] = useState('all');
-    const [sortBy, setSortBy] = useState('date'); // 'date' or 'amount'
-    const searchInputRef = useRef(null);
 
-    // Debounce search
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setDebouncedQuery(searchQuery);
-        }, 300);
-        return () => clearTimeout(timer);
-    }, [searchQuery]);
-
-    // Auto-focus on mount
-    useEffect(() => {
-        if (searchInputRef.current) {
-            searchInputRef.current.focus();
-        }
-    }, []);
-
-    // Calculate counts
-    const getCount = (status) => {
-        if (status === 'all') return claims.length;
-        return claims.filter(c => c.status === status).length;
+    // Calculate counts for stats
+    const stats = {
+        total: claims.length,
+        approved: claims.filter(c => c.status === 'approved').length,
+        rejected: claims.filter(c => c.status === 'rejected').length,
+        pending: claims.filter(c => c.status === 'submitted').length
     };
 
-    const filteredClaims = claims
-        .filter(c => {
-            const searchWords = debouncedQuery.toLowerCase().trim().split(/\s+/);
-            const fullName = c.patient.fullName.toLowerCase();
-            const insuranceId = c.patient.insuranceId.toLowerCase();
+    const recentClaims = [...claims]
+        .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+        .slice(0, 5);
 
-            const matchesSearch = searchWords.every(word =>
-                fullName.includes(word) || insuranceId.includes(word)
-            );
-
-            const matchesFilter = filterStatus === 'all' || c.status === filterStatus;
-            return matchesSearch && matchesFilter;
-        })
-        .sort((a, b) => {
-            if (sortBy === 'amount') {
-                return calculateTotal(b.bills) - calculateTotal(a.bills);
-            }
-            return new Date(b.updatedAt) - new Date(a.updatedAt);
-        });
-
-    const statusOptions = ['all', 'draft', 'submitted', 'approved', 'rejected'];
+    const getInitials = (name) => {
+        return name
+            .split(' ')
+            .map(n => n[0])
+            .join('')
+            .toUpperCase()
+            .slice(0, 2);
+    };
 
     return (
         <div className="dashboard animate-in">
             <header className="header">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <h1>Claims Dashboard</h1>
-                    <span style={{ fontSize: '0.8rem', background: 'rgba(255,255,255,0.2)', padding: '2px 8px', borderRadius: '4px' }}>
-                        {user?.role.toUpperCase()}
-                    </span>
-                </div>
-                <div style={{ display: 'flex', gap: '10px' }}>
-                    {user?.role === 'user' && (
-                        <Link to="/new" className="btn btn-primary" style={{ backgroundColor: 'white', color: 'var(--primary)' }}>
-                            <Plus size={18} /> New Claim
-                        </Link>
-                    )}
-                    <button onClick={logout} className="btn" style={{ color: 'white', padding: '8px' }} title="Logout">
-                        <LogOut size={20} />
+                <h1>Dashboard</h1>
+                <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+                    <button className="btn-text glass" style={{ padding: '10px', borderRadius: '12px' }}>
+                        <Bell size={20} color="var(--primary)" />
+                    </button>
+                    <button onClick={logout} className="btn-text glass" style={{ padding: '10px', borderRadius: '12px' }}>
+                        <User size={20} color="var(--primary)" />
                     </button>
                 </div>
             </header>
 
-            <div className="dashboard-controls">
-                <div className="search-bar-wrap">
-                    <div className="search-bar">
-                        <Search size={20} className="search-icon" />
-                        <input
-                            ref={searchInputRef}
-                            type="text"
-                            placeholder="Search by name or ID..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                        />
-                        {searchQuery && (
-                            <button className="clear-search" onClick={() => setSearchQuery('')}>
-                                <X size={18} />
-                            </button>
-                        )}
-                    </div>
-                </div>
+            <section className="hero-section">
+                <h1>Welcome back, Admin</h1>
+                <p>Here's what's happening with your claims today</p>
+            </section>
 
-                <div className="filters-section">
-                    <div className="filter-chips-scroll">
-                        <div className="filter-chips">
-                            {statusOptions.map(status => (
-                                <button
-                                    key={status}
-                                    className={`chip ${status} ${filterStatus === status ? 'active' : ''}`}
-                                    onClick={() => setFilterStatus(status)}
-                                    role="tab"
-                                    aria-selected={filterStatus === status}
-                                >
-                                    {status.charAt(0).toUpperCase() + status.slice(1)}
-                                    <span className="chip-count">({getCount(status)})</span>
-                                </button>
-                            ))}
+            <div className="stats-grid">
+                <div className="stat-card">
+                    <div className="stat-header">
+                        <span className="stat-label">Total Claims</span>
+                        <div className="stat-icon-wrap" style={{ background: '#eff6ff' }}>
+                            <FileText size={20} color="#3b82f6" />
                         </div>
                     </div>
-
-                    <div className="sort-wrapper">
-                        <button className="sort-toggle" onClick={() => setSortBy(sortBy === 'date' ? 'amount' : 'date')}>
-                            <SortAsc size={18} /> {sortBy === 'date' ? 'Date' : 'Amount'}
-                        </button>
+                    <span className="stat-value">{stats.total}</span>
+                </div>
+                <div className="stat-card">
+                    <div className="stat-header">
+                        <span className="stat-label">Approved</span>
+                        <div className="stat-icon-wrap" style={{ background: '#dcfce7' }}>
+                            <CheckCircle size={20} color="#10b981" />
+                        </div>
                     </div>
+                    <span className="stat-value">{stats.approved}</span>
+                </div>
+                <div className="stat-card">
+                    <div className="stat-header">
+                        <span className="stat-label">Rejected</span>
+                        <div className="stat-icon-wrap" style={{ background: '#fee2e2' }}>
+                            <XCircle size={20} color="#ef4444" />
+                        </div>
+                    </div>
+                    <span className="stat-value">{stats.rejected}</span>
+                </div>
+                <div className="stat-card">
+                    <div className="stat-header">
+                        <span className="stat-label">Pending</span>
+                        <div className="stat-icon-wrap" style={{ background: '#fef3c7' }}>
+                            <Clock size={20} color="#f59e0b" />
+                        </div>
+                    </div>
+                    <span className="stat-value">{stats.pending}</span>
                 </div>
             </div>
 
-            {filteredClaims.length === 0 ? (
-                <div className="empty-state">
-                    <div className="empty-icon shadow-pulse">📑</div>
-                    <p>No claims found match your criteria.</p>
-                </div>
-            ) : (
-                <div className="claims-list">
-                    {filteredClaims.map(claim => {
-                        const total = calculateTotal(claim.bills);
-                        return (
-                            <Link key={claim.id} to={`/claim/${claim.id}`} className="claim-card-link">
-                                <div className="claim-card">
-                                    <div className="claim-icon" style={{ backgroundColor: getStatusColor(claim.status) }}>
-                                        <User size={24} color="white" />
-                                    </div>
-                                    <div className="claim-info">
-                                        <div className="name-row">
+            <main className="claims-container">
+                <div className="main-card">
+                    <div className="card-header">
+                        <h2>Recent Claims</h2>
+                        <Link to="/all-claims" className="btn-view-all">View All →</Link>
+                    </div>
+                    <div className="claims-list-new">
+                        {recentClaims.map(claim => {
+                            const total = calculateTotal(claim.bills);
+                            const initials = getInitials(claim.patient.fullName);
+                            return (
+                                <Link key={claim.id} to={`/claim/${claim.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                    <div className="claim-row">
+                                        <div className="claim-avatar">
+                                            {initials}
+                                        </div>
+                                        <div className="claim-meta">
                                             <h3>{claim.patient.fullName}</h3>
-                                            <span className="amount-bold">{formatCurrency(total)}</span>
+                                            <p>{claim.patient.insuranceId}</p>
                                         </div>
-                                        <div className="id-row">
-                                            <p className="sub-text">ID: {claim.patient.insuranceId}</p>
-                                            <span className="updated-text"><Clock size={12} /> {formatTimeAgo(claim.updatedAt)}</span>
-                                        </div>
-                                        <div className="card-badges">
-                                            <span className={`status-badge ${claim.status}`}>{claim.status}</span>
+                                        <div className="claim-amount-wrap">
+                                            <span className="claim-amount">{formatCurrency(total)}</span>
+                                            <span className={`badge ${claim.status.toLowerCase().replace(' ', '-')}`}>
+                                                {claim.status}
+                                            </span>
                                         </div>
                                     </div>
-                                    <div className="claim-action">
-                                        <ArrowRight size={20} color="#ccc" />
-                                    </div>
-                                </div>
-                            </Link>
-                        );
-                    })}
+                                </Link>
+                            );
+                        })}
+                    </div>
                 </div>
-            )}
-            <footer className="footer">
-                <p className="credit">Developed by <br /><strong>P Ganesh Krishna Reddy</strong></p>
-                <p className="contact-small">pganeshkrishnareddy@gmail.com | +91 8374622779</p>
-                <div className="social-links-grid">
-                    <a href="https://linkedin.com/in/pganeshkrishnareddy" target="_blank" rel="noopener noreferrer" className="social-link" title="LinkedIn">
-                        <Linkedin size={24} />
+            </main>
+
+            <Link to="/new" className="fab">
+                <Plus size={32} />
+            </Link>
+
+            <footer className="footer-new">
+                <p className="footer-dev">Developed by <strong>Jai Krishna</strong></p>
+                <p className="footer-info" style={{ marginBottom: '20px' }}>Hospital Claims Management System</p>
+                <div className="social-btns">
+                    <a href="#" className="social-btn linkedin">
+                        <Linkedin size={20} /> LinkedIn
                     </a>
-                    <a href="https://github.com/ganeshkrishnareddy" target="_blank" rel="noopener noreferrer" className="social-link" title="GitHub">
-                        <Github size={24} />
+                    <a href="#" className="social-btn github">
+                        <Github size={20} /> GitHub
                     </a>
-                    <a href="https://pganeshkrishnareddy.vercel.app/" target="_blank" rel="noopener noreferrer" className="social-link" title="Portfolio">
-                        <Globe size={24} />
+                    <a href="#" className="social-btn email">
+                        <Mail size={20} /> Email
                     </a>
+                </div>
+                <div className="footer-info">
+                    <p>+91 7681015433 | jaikrishna9437@gmail.com</p>
+                    <p style={{ marginTop: '8px' }}>© 2026 Jai Krishna. Built with ❤️ using React</p>
                 </div>
             </footer>
         </div>

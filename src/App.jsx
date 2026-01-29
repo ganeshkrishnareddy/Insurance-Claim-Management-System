@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard';
 import ClaimForm from './components/ClaimForm';
 import ClaimDetails from './components/ClaimDetails';
 import Login from './components/Login';
+import AllClaims from './components/AllClaims';
 import './App.css';
 
 const RequireAuth = ({ children }) => {
@@ -25,6 +26,11 @@ function App() {
               <Route path="/" element={
                 <RequireAuth>
                   <Dashboard />
+                </RequireAuth>
+              } />
+              <Route path="/all-claims" element={
+                <RequireAuth>
+                  <AllClaims />
                 </RequireAuth>
               } />
               <Route path="/new" element={
