@@ -76,12 +76,12 @@ const Login = () => {
                     </button>
 
                     <div className="quick-login-buttons">
-                        <p style={{ textAlign: 'center', margin: '15px 0 10px', color: '#666', fontSize: '0.9rem' }}>— Or Quick Login —</p>
+                        <p style={{ textAlign: 'center', margin: '15px 0 10px', color: '#666', fontSize: '0.9rem' }}>— One-Click Login —</p>
                         <div style={{ display: 'flex', gap: '10px' }}>
-                            <button type="button" onClick={() => { setUsername('admin'); setPassword('admin'); }} className="btn btn-outline full-width">
+                            <button type="button" onClick={() => handleLogin('admin', 'admin')} className="btn btn-outline full-width">
                                 👑 Admin
                             </button>
-                            <button type="button" onClick={() => { setUsername('user'); setPassword('user'); }} className="btn btn-outline full-width">
+                            <button type="button" onClick={() => handleLogin('user', 'user')} className="btn btn-outline full-width">
                                 👤 User
                             </button>
                         </div>
@@ -111,7 +111,7 @@ const Login = () => {
                     margin-bottom: 40px;
                 }
                 .login-icon {
-                    background: var(--bg-soft);
+                    background: var(--bg-gradient);
                     width: 72px;
                     height: 72px;
                     border-radius: 20px;
@@ -119,7 +119,7 @@ const Login = () => {
                     align-items: center;
                     justify-content: center;
                     margin: 0 auto 20px;
-                    box-shadow: var(--shadow-sm);
+                    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
                 }
                 .login-header h1 { 
                     margin: 0; 
@@ -149,7 +149,7 @@ const Login = () => {
                 .input-with-icon input:focus {
                     border-color: var(--primary);
                     background: white;
-                    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+                    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
                     outline: none;
                 }
                 .error-message {
