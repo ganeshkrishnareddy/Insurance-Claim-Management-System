@@ -1,45 +1,24 @@
-/* Light Mode (Default) - Indigo/Violet Theme */
+/* Golden Yellow & Black Theme */
 :root {
-  --primary: #6366f1;
-  --secondary: #8b5cf6;
-  --bg-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  --bg-soft: #f8fafc;
-  --bg-page: #f1f5f9;
-  --card-bg: #ffffff;
-  --glass-bg: rgba(255, 255, 255, 0.9);
-  --text-main: #0f172a;
-  --text-muted: #475569;
-  --border-color: #e2e8f0;
+  --primary: #FFB800;
+  --secondary: #FFC933;
+  --bg-gradient: linear-gradient(135deg, #FFB800 0%, #FFC933 100%);
+  --bg-soft: #FAFAFA;
+  --bg-page: #F5F5F5;
+  --card-bg: #FFFFFF;
+  --glass-bg: rgba(255, 255, 255, 0.95);
+  --text-main: #1A1A1A;
+  --text-muted: #666666;
+  --border-color: #E0E0E0;
   --success: #22c55e;
   --warning: #f59e0b;
   --danger: #ef4444;
   --pending: #3b82f6;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 8px -1px rgb(0 0 0 / 0.12), 0 2px 4px -2px rgb(0 0 0 / 0.08);
+  --shadow-lg: 0 12px 20px -3px rgb(0 0 0 / 0.15), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --radius-md: 12px;
   --radius-lg: 24px;
-}
-
-/* Dark Mode - Indigo/Violet Theme */
-[data-theme="dark"] {
-  --primary: #818cf8;
-  --secondary: #a78bfa;
-  --bg-gradient: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
-  --bg-soft: #0b1120;
-  --bg-page: #070d1a;
-  --card-bg: #111827;
-  --glass-bg: rgba(17, 24, 39, 0.9);
-  --text-main: #e5e7eb;
-  --text-muted: #9ca3af;
-  --border-color: #1f2933;
-  --success: #4ade80;
-  --warning: #fbbf24;
-  --danger: #f87171;
-  --pending: #60a5fa;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
-  --shadow-lg: 0 10px 20px -3px rgb(0 0 0 / 0.5), 0 4px 8px -4px rgb(0 0 0 / 0.4);
 }
 
 * {
@@ -127,13 +106,14 @@ h3 {
 
 .btn-primary {
   background: var(--bg-gradient);
-  color: white;
-  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+  color: #1A1A1A;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(255, 184, 0, 0.35);
 }
 
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(22, 163, 74, 0.4);
+  box-shadow: 0 6px 16px rgba(255, 184, 0, 0.45);
 }
 
 /* Theme Toggle Button */

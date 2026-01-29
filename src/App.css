@@ -1,21 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --primary: #6366f1;
-  --secondary: #8b5cf6;
-  --bg-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  --bg-soft: #f8fafc;
-  --card-bg: #ffffff;
-  --glass-bg: rgba(255, 255, 255, 0.9);
-  --text-main: #0f172a;
-  --text-muted: #475569;
+  --primary: #FFB800;
+  --secondary: #FFC933;
+  --bg-gradient: linear-gradient(135deg, #FFB800 0%, #FFC933 100%);
+  --bg-soft: #FAFAFA;
+  --card-bg: #FFFFFF;
+  --glass-bg: rgba(255, 255, 255, 0.95);
+  --text-main: #1A1A1A;
+  --text-muted: #666666;
   --success: #22c55e;
   --warning: #f59e0b;
   --danger: #ef4444;
   --pending: #3b82f6;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 8px -1px rgb(0 0 0 / 0.12), 0 2px 4px -2px rgb(0 0 0 / 0.08);
+  --shadow-lg: 0 12px 20px -3px rgb(0 0 0 / 0.15), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --radius-md: 12px;
   --radius-lg: 24px;
 }
@@ -430,7 +430,7 @@ body {
   justify-content: center;
   background: var(--bg-soft);
   border: 1px solid var(--border-color);
-  color: var(--text-muted);
+  color: var(--text-main);
   transition: all 0.2s ease;
   text-decoration: none;
 }

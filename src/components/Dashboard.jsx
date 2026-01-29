@@ -42,14 +42,11 @@ const Dashboard = () => {
             <header className="header">
                 <h1>Dashboard</h1>
                 <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                    <button onClick={toggleTheme} className="btn-text glass" style={{ padding: '10px', borderRadius: '12px', background: 'var(--card-bg)' }} title={theme === 'light' ? 'Dark Mode' : 'Light Mode'}>
-                        {theme === 'light' ? <Moon size={20} color="var(--primary)" /> : <Sun size={20} color="var(--primary)" />}
-                    </button>
                     <button className="btn-text glass" style={{ padding: '10px', borderRadius: '12px', background: 'var(--card-bg)' }}>
-                        <Bell size={20} color="var(--primary)" />
+                        <Bell size={20} color="#1A1A1A" />
                     </button>
                     <button onClick={logout} className="btn-text glass" style={{ padding: '10px', borderRadius: '12px', background: 'var(--card-bg)' }}>
-                        <User size={20} color="var(--primary)" />
+                        <User size={20} color="#1A1A1A" />
                     </button>
                 </div>
             </header>

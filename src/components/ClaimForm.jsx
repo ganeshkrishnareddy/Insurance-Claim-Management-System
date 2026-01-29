@@ -169,13 +169,14 @@ const ClaimForm = () => {
                     height: 40px;
                     border-radius: 10px;
                     border: 1px solid var(--border-color);
-                    background: var(--card-bg);
-                    color: var(--text-main);
+                    background: white;
+                    color: #1A1A1A;
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     cursor: pointer;
                     transition: all 0.2s;
+                    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
                 }
                 .back-btn:hover {
                     background: var(--primary);

@@ -119,7 +119,7 @@ const Login = () => {
                     align-items: center;
                     justify-content: center;
                     margin: 0 auto 20px;
-                    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+                    box-shadow: 0 4px 12px rgba(255, 184, 0, 0.3);
                 }
                 .login-header h1 { 
                     margin: 0; 
@@ -149,7 +149,7 @@ const Login = () => {
                 .input-with-icon input:focus {
                     border-color: var(--primary);
                     background: white;
-                    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
+                    box-shadow: 0 0 0 3px rgba(255, 184, 0, 0.2);
                     outline: none;
                 }
                 .error-message {
