@@ -1,19 +1,19 @@
-/* Light Mode (Default) - Teal/Cyan Theme */
+/* Light Mode (Default) - Green Theme */
 :root {
-  --primary: #0891b2;
-  --secondary: #06b6d4;
-  --bg-gradient: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+  --primary: #16a34a;
+  --secondary: #22c55e;
+  --bg-gradient: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
   --bg-soft: #f8fafc;
-  --bg-page: #e0f2fe;
+  --bg-page: #ecfdf5;
   --card-bg: #ffffff;
-  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-bg: rgba(255, 255, 255, 0.85);
   --text-main: #0f172a;
   --text-muted: #475569;
-  --border-color: #cbd5e1;
-  --success: #10b981;
+  --border-color: #d1d5db;
+  --success: #16a34a;
   --warning: #f59e0b;
   --danger: #ef4444;
-  --pending: #0ea5e9;
+  --pending: #3b82f6;
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -21,11 +21,11 @@
   --radius-lg: 24px;
 }
 
-/* Dark Mode - Teal/Cyan Theme */
+/* Dark Mode - Green Theme */
 [data-theme="dark"] {
-  --primary: #22d3ee;
-  --secondary: #67e8f9;
-  --bg-gradient: linear-gradient(135deg, #0e7490 0%, #0891b2 100%);
+  --primary: #4ade80;
+  --secondary: #86efac;
+  --bg-gradient: linear-gradient(135deg, #15803d 0%, #16a34a 100%);
   --bg-soft: #0f172a;
   --bg-page: #020617;
   --card-bg: #1e293b;
@@ -33,10 +33,10 @@
   --text-main: #f1f5f9;
   --text-muted: #94a3b8;
   --border-color: #334155;
-  --success: #34d399;
+  --success: #4ade80;
   --warning: #fbbf24;
   --danger: #f87171;
-  --pending: #38bdf8;
+  --pending: #60a5fa;
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
   --shadow-lg: 0 10px 20px -3px rgb(0 0 0 / 0.5), 0 4px 8px -4px rgb(0 0 0 / 0.4);
@@ -128,12 +128,12 @@ h3 {
 .btn-primary {
   background: var(--bg-gradient);
   color: white;
-  box-shadow: 0 4px 12px rgba(8, 145, 178, 0.3);
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(8, 145, 178, 0.4);
+  box-shadow: 0 6px 16px rgba(22, 163, 74, 0.4);
 }
 
 /* Theme Toggle Button */
